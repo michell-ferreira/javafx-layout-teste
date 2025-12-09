@@ -1,10 +1,14 @@
 package org.example;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -13,38 +17,34 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        Button button1 = new Button("Botão 1");
-        // Um botão simples
-        Button button2 = new Button("Botão 2");
-        Button button3 = new Button("Botão 3");
-        Button button4 = new Button("Botão 4");
+        // Criação dos elementos (rótulos, campos de texto e botão)
+        Label rotuloNome = new Label("Nome:");
+        Label rotuloEmail = new Label("E-mail");
 
-        HBox hBox = new HBox(button1, button2);
-        // HBox joga os itens lado a lado horizontalmente.
+        TextField campoNome = new TextField();
+        TextField campoEmail = new TextField();
 
-        hBox.setAlignment(Pos.CENTER);
-        // Centraliza os botões dentro do HBox
+        Button botaoEnviar = new Button("Enviar");
 
-        VBox vBox = new VBox(button3, button4);
-        // VBox empilha os itens um embaixo do outro.
+        // Criação do GridPane
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(8);
+        // Hgap = espaçamento horizontal entre as colunas.
+        // Como margin-right entre os elementos.
+        gridPane.setVgap(8);
+        // Vgap = espaçamento vertical entre as linhas.
+        // Como margin-bottom no CSS.
+        gridPane.setPadding(new Insets(5));
+        // Padding externo do container inteiro.
+        // Igual padding do CSS: espaço entre a borda do layout e os elementos dentro dele.
 
-        vBox.setAlignment(Pos.CENTER);
+        gridPane.addRow(0, rotuloNome, campoNome);
+        gridPane.addRow(1, rotuloEmail, campoEmail);
+        gridPane.addRow(2, botaoEnviar);
 
-        BorderPane borderPane = new BorderPane();
-        // Layout que permite dividir a tela em 5 partes: TOP, CENTER, LEFT, RIGHT, BOTTOM.
-
-        borderPane.setTop(hBox);
-        // Coloca os botões 1 e 2 na parte superior da tela.
-
-        borderPane.setCenter(vBox);
-        // Coloca os botões 3 e 4 no centro da tela.
-
-        Scene scene = new Scene(borderPane, 300, 300);
-        // Cria a cena com o BorderPane dentro, tamanho 300x300.
-
+        Scene scene = new Scene(gridPane, 400, 200);
         stage.setScene(scene);
         // stage usa a scene criada.
-
         stage.show();
         // Mostra a janela. Sem isso, nada aparece.
     }
